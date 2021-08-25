@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>끝말잇기</title>
+</head>
+
+<body>
+<div><span id= "order">1</span>번째 참가자</div>
+<div>제시어: <span id="word"></span></div>
+<input type="text">
+<button>입력</button>
+<script>
+  const number = parseInt(prompt('몇 명이 참가하나요?'),);
+  const $button = document.querySelector('button');
+  const $input = document.querySelector('input');
+  const $word = document.querySelector('#word');
+  let word; //제시어
+  let newWord;// 새로 입력한 단어  => 이 두가지는 자바스크립트 변수에 데이터를 저장한것임. 항상 데이터를 바꿔주면 화면을 바꾸어 주어야 한다.
+  
+  const onClickButton = () => {
+    if(!word) {// 제시어가 비어 있는가?
+      // 비어있다. 
+      word = newWord; //제시어가 비어 있는 경우 새로 입력한 단어가 제시어가 된다. 변수에다 넣어주긴 했지만 화면에 넣어준것은 아님.
+      $word.textContent = word; // textContent 에 제시어를 넣어주면 된다.
+      $input.value = ''; // 제시어가 입력되고 나서 입력창이 비워져야 하니까 넣어준 코드이다. input 은 안에 들어있는 값이 value 이다. span 이나 다른 태그들은 textContent 이다.
+    }else {
+      //비어있지 않다
+      // 첫번째 제시어를 입력하고 난 후에는 제시어가 비어져 있지 않기 때문에 else 로 넘어오며 여기에 코드를 구현해 주어야 한다. -> 그리고 그 제시어가 올바른지 아닌지를 판단해 주어야 한다.(if else 문 사용)
+      if(word[word.length - 1] === newWord[0]){ //올바른가(제시어의 끝글자 == 두번째 입력글자의 첫글자)
+        word = newWord;  
+        $word.textContent = word;  //이렇게 윗줄과 똑같이 반복되는 코드는 좋은 것이 아니다. 
+        $input.value = '';
+      }else{//올바르지 않은가
+
+      }
+
+    } 
+  };
+  const onInput = (event) => {
+    newWord = event.target.value; // 새로 입력한 단어 저장 (순서도 검증 단계)
+  };
+
+  $button.addEventListener('click', onClickButton);
+  $input.addEventListener('input',onInput);
+  
+</script>
+</body>
+
+</html>
